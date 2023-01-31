@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+          {% block stylesheets %}
+        
+  <link href="{{ asset('assets/img/favicon.png')}}" rel="icon">
+  <link href="{{ asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="{{ asset('https://fonts.googleapis.com')}}">
+  <link rel="preconnect" href="{{ asset('https://fonts.gstatic.com')}}" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+  <link href="{{ asset('assets/vendor/remixicon/remixicon.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ asset('assets/css/main.css')}}">
+        {% endblock %}
+
+        {% block javascripts %}
+  <!-- Vendor JS Files -->
+  <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{ asset('assets/vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ asset('assets/js/main.js')}}"></script>
+        {% endblock %}
+
+    </head>
+        {% block body %}
+<body class="page-services">
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="header d-flex align-items-center fixed-top "style="background: rgba(27, 47, 69, 0.9); height:70px;">
+    <div class="container-fluid container-xl d-flex align-items-center justify-content-between" >
+
+      <a href="index.html" class="logo d-flex align-items-center">
+        <!-- Uncomment the line below if you also wish to use an image logo -->
+        <!-- <img src="assets/img/logo.png" alt=""> -->
+        <h1 class="d-flex align-items-center">IQ Ahmed</h1>
+      </a>
+
+      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a href="https://github.com/Iqahmediq" target="blanc">About Me</a></li>
+          <li class="dropdown"><a href="{{path('app_formation')}}"><span>Formations</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+            <ul>
+              <li><a href="{{ path('ajout_fomation') }}">Add Formation</a></li>
+              <li class="dropdown"><a href="#"><span>Parcourir Formations</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                {% for formation in formationsa %}
+                  <li><a href="{{path('formations_id', {'id': formation.id}) }}">{{ formation.titre }}</a></li>
+                {% endfor %}
+
+                </ul>
+              </li>
+              <li class="dropdown"><a href="#"><span>Parcourir Participants</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
+                <ul>
+                {% for participant in participants %}
+                  <li><a href="{{path('Participant_id', {'id': participant.id}) }}">{{ participant.nom }}</a></li>
+                {% endfor %}
+
+                </ul>
+              </li>
+              </li>
+              
+            </ul>
+          </li>
+          <li><a href="{{path('update')}}">Profile</a></li>
+
+          <li><a href="{{path('security_logout')}}">logout</a></li>
+
+        </ul>
+
+      </nav><!-- .navbar -->
+    </div>
+  </header><!-- End Header -->
+  <!-- ======= Hero Section ======= -->
+  <!-- ======= Hero Section ======= -->
+<div class="container h-100" style="margin-top:100px  ">
+<br>
+<center>
+  <h1>La formation {{formations.titre}}</h1>
+</center>
+<br>
+
+    <section id="about" class="about" style="margin-left:13%;">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4" data-aos="fade-up">
+          <div class="col-lg-4">
+            <img src="{{ asset('uploads/formations/' ~ formations.image )}}" class="img-fluid"style="height:500px;width:500px;" alt="">
+          </div>
+          <div class="col-lg-8" style="background-color:#ebedf0; width: 500px;">
+            <div class="content ps-lg-5">
+              <br>
+
+              <h3>{{ formations.titre }}</h3>
+              <br>
+              <ul>
+                <li><i class="bi bi-check-circle-fill"></i> id :{{ formations.id }}</li>
+                <li><i class="bi bi-check-circle-fill"></i> Durée :{{ formations.duree }}</li>
+                <li><i class="bi bi-check-circle-fill"></i> Price :{{ formations.price }}</li>
+                <li><i class="bi bi-check-circle-fill"></i> date debut  :{{ formations.getBeginAt()|date("m/d/Y") }}</li>
+                <li><i class="bi bi-check-circle-fill"></i> temps debut  :{{ formations.getBeginAt()|date("H:i:s") }}</li>
+                <li><i class="bi bi-check-circle-fill"></i> participant :
+                
+                {% for participant in participants %}
+
+    {% if formations.id== participant.getFormation().id %}
+    {{ participant.nom }},
+
+    {% endif %}
+    {% endfor %}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
+
+
+   
+</div>
+
+  {% endblock %}
